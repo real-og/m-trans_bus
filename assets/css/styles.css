@@ -295,6 +295,25 @@ footer > div:not(.logo) { display: flex; flex-direction: column; gap: 9px; color
 footer strong, footer a { color: var(--white); }
 .logo--footer img { width: min(260px, 100%); height: auto; }
 
+@media (min-width: 761px) {
+  h1, h2 { line-height: 1.08; }
+
+  .check-list { max-width: 780px; margin-bottom: 28px; }
+  .check-list li { min-height: 96px; padding: 18px 20px 18px 34px; }
+  .check-list li::before { top: 24px; left: 10px; width: 10px; height: 10px; }
+  .check-list strong { font-size: 13px; line-height: 1.35; }
+  .check-list span { margin-top: 7px; font-size: 11px; line-height: 1.5; }
+
+  .metrics-section { padding-bottom: 46px; }
+  .metrics-intro { margin-bottom: 42px; }
+  .metrics-intro .section-index { font-size: 11px; }
+  .metrics-intro p { font-size: 17px; line-height: 1.65; }
+  .metrics-grid article { min-height: 190px; padding: 26px 27px; }
+  .metrics-grid strong { font-size: clamp(34px, 3.25vw, 50px); }
+  .metrics-grid span { max-width: 220px; font-size: 12px; line-height: 1.55; }
+  .data-note { margin-top: 26px; font-size: 10px; line-height: 1.5; }
+}
+
 @media (max-width: 1180px) {
   :root { --gutter: 38px; }
   .site-header nav { display: none; }
