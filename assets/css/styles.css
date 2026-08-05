@@ -355,7 +355,7 @@ footer strong, footer a { color: var(--white); }
   .action-label-full { display: none; }
   .action-label-short { display: inline; }
   .phone-status { display: none; }
-  .inquiry-bridge { position: relative; z-index: 10; display: flex; justify-content: stretch; margin: -18px 0 0; padding: 0 var(--gutter); background: linear-gradient(180deg, var(--ink) 0 38px, var(--paper) 38px 100%); pointer-events: none; }
+  .inquiry-bridge { position: relative; z-index: 10; justify-content: stretch; margin: -18px 0 0; padding: 0 var(--gutter); background: linear-gradient(180deg, var(--ink) 0 38px, var(--paper) 38px 100%); pointer-events: none; }
   .hero-inquiry { width: 100%; pointer-events: auto; }
   .hero-form { gap: 11px; padding: 22px 18px 18px; border-radius: 20px; box-shadow: 0 18px 45px rgba(17,18,15,.2); }
   .hero-form-intro { margin-bottom: 4px; }
@@ -434,6 +434,11 @@ footer strong, footer a { color: var(--white); }
   .contact-form-wrap { padding: 24px 19px; box-shadow: 8px 8px 0 rgba(17,18,15,.12); }
   .lead-form input { font-size: 16px; }
   footer { grid-template-columns: 1fr; gap: 28px; padding: 44px var(--gutter) max(44px, env(safe-area-inset-bottom)); }
+}
+
+/* Show the bridge form only on touch-first phones, never in a desktop browser. */
+@media (max-width: 760px) and (hover: none) and (pointer: coarse) {
+  .inquiry-bridge { display: flex; }
 }
 
 @media (max-width: 430px) {
