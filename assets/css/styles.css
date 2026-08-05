@@ -298,20 +298,49 @@ footer strong, footer a { color: var(--white); }
 @media (min-width: 761px) {
   h1, h2 { line-height: 1.08; }
 
-  .check-list { max-width: 780px; margin-bottom: 28px; }
-  .check-list li { min-height: 96px; padding: 18px 20px 18px 34px; }
-  .check-list li::before { top: 24px; left: 10px; width: 10px; height: 10px; }
-  .check-list strong { font-size: 13px; line-height: 1.35; }
-  .check-list span { margin-top: 7px; font-size: 11px; line-height: 1.5; }
+  .site-header { min-height: 86px; gap: clamp(18px, 2.2vw, 36px); }
+  .site-header .logo img { width: clamp(174px, 13.5vw, 224px); }
+  .site-header nav { gap: 7px; padding: 6px; }
+  .site-header nav a { padding: 12px 17px; font-size: 12px; }
+  .header-phone { padding: 12px 18px; font-size: 13px; }
+  .site-header .header-cta { min-height: 48px; padding-inline: 23px; font-size: 11px; }
 
-  .metrics-section { padding-bottom: 46px; }
-  .metrics-intro { margin-bottom: 42px; }
+  .check-list { max-width: 840px; margin-bottom: 31px; }
+  .check-list li { min-height: 110px; padding: 20px 22px 20px 39px; }
+  .check-list li::before { top: 27px; left: 12px; width: 11px; height: 11px; }
+  .check-list strong { font-size: 15px; line-height: 1.32; }
+  .check-list span { margin-top: 8px; font-size: 13px; line-height: 1.48; }
+  .hero-actions { gap: 12px; }
+  .hero-actions .button { min-height: 58px; padding-inline: 24px; font-size: 11px; }
+  .hero-actions .button-icon, .hero-actions .button--telegram svg { width: 23px; height: 23px; }
+  .hero-actions .button--phone svg { width: 21px; height: 21px; }
+
+  .metrics-section { padding-bottom: 40px; }
+  .metrics-intro { margin-bottom: 34px; }
   .metrics-intro .section-index { font-size: 11px; }
   .metrics-intro p { font-size: 17px; line-height: 1.65; }
-  .metrics-grid article { min-height: 190px; padding: 26px 27px; }
-  .metrics-grid strong { font-size: clamp(34px, 3.25vw, 50px); }
-  .metrics-grid span { max-width: 220px; font-size: 12px; line-height: 1.55; }
-  .data-note { margin-top: 26px; font-size: 10px; line-height: 1.5; }
+  .metrics-grid { gap: 12px; }
+  .metrics-grid article { min-height: 168px; padding: 22px 24px; border-radius: 20px; }
+  .metrics-grid strong { font-size: clamp(38px, 3.35vw, 52px); }
+  .metrics-grid span { max-width: 235px; font-size: 13px; line-height: 1.45; }
+  .data-note { margin-top: 22px; font-size: 11px; line-height: 1.5; }
+
+  .steps article { min-height: 238px; padding: 24px; }
+  .step-top { margin-bottom: 34px; }
+  .step-top span { width: 44px; height: 44px; flex-basis: 44px; font-size: 11px; }
+  .step-summary small { margin-bottom: 10px; font-size: 10px; line-height: 1.35; }
+  .steps h3 { font-size: 21px; }
+  .steps p { font-size: 14px; line-height: 1.6; }
+  .steps article:hover p, .steps article:focus p { max-height: 230px; margin-top: 16px; }
+
+  .contact-links { gap: 16px; margin: 38px 0; }
+  .contact-telegram, .contact-phone { min-height: 78px; border-radius: 20px; }
+  .contact-telegram { gap: 17px; padding: 18px 27px; box-shadow: 0 18px 40px rgba(17,18,15,.24); }
+  .contact-telegram svg { width: 36px; height: 36px; }
+  .contact-telegram span { gap: 4px; font-size: 16px; }
+  .contact-telegram small { font-size: 10px; }
+  .contact-phone { padding: 18px 28px; border: 2px solid var(--ink); background: rgba(255,255,255,.72); box-shadow: 0 15px 34px rgba(17,18,15,.12); font-size: 18px; font-weight: 900; transition: background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .contact-phone:hover { background: var(--ink); color: var(--white); box-shadow: 0 18px 40px rgba(17,18,15,.24); transform: translateY(-4px); }
 }
 
 @media (max-width: 1180px) {
