@@ -1,5 +1,50 @@
 const telegramUrl = "https://t.me/M_TRANS_BY";
 
+const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.querySelector(".mobile-menu-toggle");
+
+function closeMobileMenu() {
+  if (!siteHeader || !menuToggle) return;
+  siteHeader.classList.remove("is-menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Открыть меню");
+}
+
+if (siteHeader && menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    siteHeader.classList.toggle("is-menu-open", !isOpen);
+    menuToggle.setAttribute("aria-expanded", String(!isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Открыть меню" : "Закрыть меню");
+  });
+
+  siteHeader.querySelectorAll("nav a").forEach((link) => link.addEventListener("click", closeMobileMenu));
+  document.addEventListener("click", (event) => {
+    if (!siteHeader.contains(event.target)) closeMobileMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMobileMenu();
+  });
+}
+
+document.querySelectorAll(".steps article").forEach((step) => {
+  const hint = step.querySelector(".step-tap-hint");
+  const toggleStep = () => {
+    if (!window.matchMedia("(max-width: 760px)").matches) return;
+    const isOpen = step.classList.toggle("is-open");
+    step.setAttribute("aria-expanded", String(isOpen));
+    if (hint) hint.textContent = isOpen ? "Нажмите, чтобы скрыть" : "Нажмите, чтобы раскрыть";
+  };
+
+  step.addEventListener("click", toggleStep);
+  step.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleStep();
+    }
+  });
+});
+
 document.querySelectorAll("[data-lead-form]").forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
