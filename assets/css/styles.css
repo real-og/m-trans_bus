@@ -157,6 +157,18 @@ h1 em { display: block; }
 .section-index { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; color: #8c7200; }
 .section-index::before { width: 20px; height: 3px; border-radius: 999px; background: currentColor; content: ""; }
 h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
+.process-section h2 em,
+.brands-heading h2 em,
+.quality-content h2 em,
+.faq-title h2 em {
+  padding: .07em .2em .11em;
+  background: var(--yellow);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  -webkit-text-stroke: 0;
+}
 .split-heading > p { max-width: 430px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .section--dark .section-index { color: var(--yellow); }
 .section--dark .split-heading > p { color: #b9bab4; }
