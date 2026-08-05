@@ -3,6 +3,14 @@ const telegramUrl = "https://t.me/M_TRANS_BY";
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".mobile-menu-toggle");
 
+function updateHeaderState() {
+  if (!siteHeader) return;
+  siteHeader.classList.toggle("is-scrolled", window.scrollY > 18);
+}
+
+updateHeaderState();
+window.addEventListener("scroll", updateHeaderState, { passive: true });
+
 function closeMobileMenu() {
   if (!siteHeader || !menuToggle) return;
   siteHeader.classList.remove("is-menu-open");
