@@ -24,6 +24,7 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const dots = carousel.querySelector(".carousel-dots");
   let active = 0;
   let timer;
+  let touchStartX = null;
 
   slides.forEach((_, index) => {
     const dot = document.createElement("button");
@@ -62,6 +63,19 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   carousel.querySelector(".carousel-button--next").addEventListener("click", () => show(active + 1, true));
   carousel.addEventListener("mouseenter", () => window.clearInterval(timer));
   carousel.addEventListener("mouseleave", startAutoplay);
+  carousel.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0]?.clientX ?? null;
+    window.clearInterval(timer);
+  }, { passive: true });
+  carousel.addEventListener("touchend", (event) => {
+    const touchEndX = event.changedTouches[0]?.clientX;
+    if (touchStartX !== null && touchEndX !== undefined && Math.abs(touchStartX - touchEndX) > 42) {
+      show(active + (touchStartX > touchEndX ? 1 : -1), true);
+    } else {
+      startAutoplay();
+    }
+    touchStartX = null;
+  }, { passive: true });
 
   show(0);
   startAutoplay();
