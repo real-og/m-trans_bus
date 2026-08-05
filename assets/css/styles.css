@@ -129,7 +129,8 @@ h1 em { display: block; }
 .button--phone:hover svg { stroke: var(--ink); }
 .phone-status { width: 6px; height: 6px; margin-right: -5px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 5px rgba(255,213,0,.1); }
 .button--phone:hover .phone-status { background: var(--ink); box-shadow: 0 0 0 5px rgba(17,18,15,.1); }
-.hero-inquiry { position: absolute; z-index: 6; right: var(--gutter); bottom: -86px; width: min(390px, 31vw); color: var(--ink); }
+.inquiry-bridge { position: relative; z-index: 10; display: flex; justify-content: flex-end; margin: -120px 0 -145px; padding: 0 var(--gutter); pointer-events: none; }
+.hero-inquiry { width: min(390px, 31vw); color: var(--ink); pointer-events: auto; }
 .hero-form { position: relative; display: grid; gap: 13px; padding: 28px; overflow: hidden; border: 1px solid rgba(17,18,15,.1); border-radius: 24px; background: var(--white); box-shadow: 0 30px 80px rgba(17,18,15,.28); }
 .hero-form::before { position: absolute; top: 0; right: 0; left: 0; height: 6px; background: var(--yellow); content: ""; }
 .hero-form-intro { display: flex; gap: 13px; align-items: center; margin-bottom: 3px; }
@@ -298,7 +299,7 @@ footer strong, footer a { color: var(--white); }
   .hero-copy { width: 67%; }
   .hero-photo { width: 54%; }
   .hero::after { background: linear-gradient(90deg, #11120f 0%, #11120f 49%, rgba(17,18,15,.86) 61%, transparent 100%); }
-  .hero-inquiry { right: 38px; width: 340px; }
+  .hero-inquiry { width: 340px; }
   .hero-form { padding: 24px; }
   .hero-form-intro strong { font-size: 13px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -324,7 +325,8 @@ footer strong, footer a { color: var(--white); }
   .check-list li + li { border-top: 1px solid rgba(255,255,255,.13); border-left: 0; }
   .hero-actions { align-items: stretch; flex-direction: column; }
   .hero-actions .button { width: 100%; min-height: 50px; }
-  .hero-inquiry { position: relative; right: auto; bottom: auto; width: auto; margin: 0 20px -54px; }
+  .inquiry-bridge { justify-content: stretch; margin: -34px 0 -54px; padding: 0 20px; }
+  .hero-inquiry { width: 100%; }
   .hero-form { padding: 24px 20px 20px; border-radius: 20px; box-shadow: 0 24px 60px rgba(17,18,15,.24); }
   .hero-form-intro { margin-bottom: 4px; }
   .hero-form-intro strong { font-size: 14px; }
