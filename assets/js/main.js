@@ -136,9 +136,6 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
-    if (restart && window.matchMedia("(max-width: 760px)").matches) {
-      brandButtons[active]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }
     if (restart) startAutoplay();
   }
 

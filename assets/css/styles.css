@@ -303,13 +303,14 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .brands-section { padding: clamp(88px, 9vw, 138px) 0; overflow: hidden; background: #ebeae4; }
 .brands-heading { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin: 0 var(--gutter) 34px; }
 .brands-heading > p { max-width: 380px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; text-align: right; }
-.brand-selector { display: grid; max-width: 1240px; margin: 0 auto 42px; padding: 0 var(--gutter); grid-template-columns: repeat(10, minmax(82px, 1fr)); gap: 8px; }
-.brand-logo { position: relative; display: grid; min-width: 0; height: 82px; padding: 11px; place-items: center; overflow: hidden; border: 1px solid rgba(17,18,15,.12); border-radius: 14px; background: rgba(255,255,255,.68); cursor: pointer; filter: grayscale(1); opacity: .66; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, filter .25s ease, opacity .25s ease, transform .25s ease; }
+.brand-selector { display: grid; max-width: 1180px; margin: 0 auto 52px; padding: 0 var(--gutter); grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.brand-logo { position: relative; display: grid; min-width: 0; height: 138px; padding: 20px; place-items: center; overflow: hidden; border: 1px solid rgba(17,18,15,.12); border-radius: 20px; background: rgba(255,255,255,.78); cursor: pointer; filter: grayscale(1); opacity: .7; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, filter .25s ease, opacity .25s ease, transform .25s ease; }
 .brand-logo::after { position: absolute; right: 10px; bottom: 7px; left: 10px; height: 3px; border-radius: 4px; background: var(--yellow-deep); opacity: 0; transform: scaleX(.35); transition: opacity .25s ease, transform .25s ease; content: ""; }
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .brand-logo:hover, .brand-logo:focus-visible { border-color: rgba(17,18,15,.3); filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
 .brand-logo.is-active { border-color: var(--yellow-deep); background: #fff; box-shadow: 0 12px 28px rgba(17,18,15,.1); filter: grayscale(0); opacity: 1; }
 .brand-logo.is-active::after { opacity: 1; transform: scaleX(1); }
+.brand-logo--dark, .brand-logo--dark.is-active { background: #171812; }
 .campaign-carousel { position: relative; }
 .carousel-stage { position: relative; height: clamp(360px, 42vw, 590px); perspective: 1400px; }
 .carousel-stage .carousel-slide { position: absolute; top: 50%; left: 50%; width: min(58vw, 820px); height: min(38vw, 540px); margin: 0; padding: 0; overflow: hidden; border: 0; border-radius: 28px; background: var(--graphite); box-shadow: 0 28px 75px rgba(17,18,15,.18); opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(.68); transition: transform .55s cubic-bezier(.22,.8,.22,1), opacity .4s ease, filter .4s ease; }
@@ -460,7 +461,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .hero-form { padding: 24px; }
   .hero-form-intro strong { font-size: 13px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-  .brand-selector { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .brand-selector { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .brand-logo { height: 120px; padding: 17px; }
   .footer-services { grid-template-columns: 1fr; }
   .footer-services a, .footer-services a:not(:first-child) { min-height: 118px; padding: 24px 68px 24px 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); }
   .footer-services a:not(:first-child) { padding-left: 0; }
@@ -619,9 +621,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .brands-heading > p { text-align: left; }
   .brands-heading h2, .faq-title h2 { overflow: visible; }
   .brands-heading h2 em, .faq-title h2 em { display: inline-block; padding: 0 .16em; border: 0; border-radius: .12em; background: var(--yellow); box-shadow: none; color: var(--ink); -webkit-text-fill-color: var(--ink); -webkit-text-stroke: 0; line-height: inherit; }
-  .brand-selector { display: grid; max-width: none; margin: 0 0 27px; padding: 2px var(--gutter) 10px; grid-template-columns: none; grid-auto-columns: 118px; grid-auto-flow: column; gap: 8px; overflow-x: auto; overscroll-behavior-inline: contain; scroll-padding-inline: var(--gutter); scrollbar-width: none; }
-  .brand-selector::-webkit-scrollbar { display: none; }
-  .brand-logo { height: 74px; padding: 10px; border-radius: 12px; }
+  .brand-selector { max-width: none; margin: 0 var(--gutter) 34px; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; gap: 10px; overflow: visible; }
+  .brand-logo { height: 102px; padding: 13px; border-radius: 14px; }
   .carousel-stage { height: clamp(250px, 74vw, 340px); }
   .carousel-stage .carousel-slide { width: 84vw; height: auto; aspect-ratio: 3 / 2; border-radius: 18px; }
   .carousel-stage .is-prev { transform: translate(-94%, -50%) scale(.65); }
