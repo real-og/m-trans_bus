@@ -101,6 +101,7 @@ document.querySelectorAll("[data-lead-form]").forEach((form) => {
 document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const slides = [...carousel.querySelectorAll("[data-slide]")];
   const dots = carousel.querySelector(".carousel-dots");
+  const brandButtons = [...carousel.parentElement.querySelectorAll("[data-brand-index]")];
   let active = 0;
   let timer;
   let touchStartX = null;
@@ -130,6 +131,14 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     });
 
     dotButtons.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
+    brandButtons.forEach((button, buttonIndex) => {
+      const isActive = buttonIndex === active;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+    if (restart && window.matchMedia("(max-width: 760px)").matches) {
+      brandButtons[active]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
     if (restart) startAutoplay();
   }
 
@@ -140,6 +149,12 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
 
   carousel.querySelector(".carousel-button--prev").addEventListener("click", () => show(active - 1, true));
   carousel.querySelector(".carousel-button--next").addEventListener("click", () => show(active + 1, true));
+  brandButtons.forEach((button) => button.addEventListener("click", () => show(Number(button.dataset.brandIndex), true)));
+  slides.forEach((slide, index) => {
+    slide.addEventListener("click", () => {
+      if (index !== active) show(index, true);
+    });
+  });
   carousel.addEventListener("mouseenter", () => window.clearInterval(timer));
   carousel.addEventListener("mouseleave", startAutoplay);
   carousel.addEventListener("touchstart", (event) => {
