@@ -14,7 +14,7 @@
   <meta property="og:description" content="Мобильный билборд на колёсах, который работает до 17 часов в сутки.">
   <meta property="og:image" content="assets/images/hero-bus-v2.webp">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260813-05">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260813-06">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"ProfessionalService","name":"M-TRANS.BY","description":"Размещение рекламы на задней части автобусов по Беларуси","telephone":"+375296065651","email":"info@m-trans.by","areaServed":{"@type":"Country","name":"Беларусь"},"sameAs":["https://t.me/M_TRANS_BY"]}
   </script>
@@ -125,6 +125,7 @@
           </div>
         </div>
         <div class="belarus-map" role="group" aria-label="Города Беларуси, где доступно размещение рекламы">
+          <div class="belarus-map__canvas">
           <svg class="belarus-map__shape" viewBox="0 0 700 560" role="img" aria-label="Карта Беларуси">
             <defs>
               <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".58" stop-color="#f7f4d4"/><stop offset="1" stop-color="#ffe45a"/></linearGradient>
@@ -149,10 +150,10 @@
           <div class="city-marker city-marker--right city-marker--below" style="--x:67.2%;--y:26.6%">
             <button type="button" data-city-button data-city="Витебск" data-price="от 290 р." aria-label="Витебск — стоимость от 290 рублей"><span>Витебск</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
           </div>
-          <div class="city-marker" style="--x:18.6%;--y:51.2%">
+          <div class="city-marker city-marker--label-up-mobile" style="--x:18.6%;--y:51.2%">
             <button type="button" data-city-button data-city="Гродно" data-price="от 290 р." aria-label="Гродно — стоимость от 290 рублей"><span>Гродно</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
           </div>
-          <div class="city-marker city-marker--right is-active" style="--x:47.1%;--y:47.4%">
+          <div class="city-marker city-marker--right city-marker--label-down-mobile is-active" style="--x:47.1%;--y:47.4%">
             <button type="button" data-city-button data-city="Минск" data-price="от 290 р." aria-label="Минск — стоимость от 290 рублей" aria-pressed="true"><span>Минск</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
           </div>
           <div class="city-marker" style="--x:68.3%;--y:47.5%">
@@ -163,6 +164,7 @@
           </div>
           <div class="city-marker city-marker--right" style="--x:73.1%;--y:71.2%">
             <button type="button" data-city-button data-city="Гомель" data-price="от 290 р." aria-label="Гомель — стоимость от 290 рублей"><span>Гомель</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
+          </div>
           </div>
           <p class="belarus-map__hint">Наведите или нажмите на город</p>
         </div>
