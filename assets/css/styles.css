@@ -242,22 +242,28 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .coverage-section { position: relative; overflow: hidden; background: #eeede7; }
 .coverage-section::before { position: absolute; top: 12%; left: -150px; width: 420px; height: 420px; border: 1px solid rgba(17,18,15,.07); border-radius: 50%; box-shadow: 0 0 0 65px rgba(17,18,15,.018), 0 0 0 130px rgba(17,18,15,.012); content: ""; pointer-events: none; }
 .coverage-section .section-heading em { display: inline; padding: 0 .16em; border-radius: .12em; background: var(--yellow); color: var(--ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.coverage-card { position: relative; z-index: 1; display: grid; min-height: 610px; grid-template-columns: minmax(300px, .72fr) minmax(560px, 1.28fr); overflow: hidden; border-radius: 32px; background: var(--graphite); box-shadow: 0 35px 85px rgba(17,18,15,.2); color: var(--white); }
-.coverage-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: clamp(36px, 4.5vw, 68px); background: linear-gradient(135deg, #272a24, #1b1d19); }
-.coverage-copy::after { position: absolute; top: 0; right: -90px; bottom: 0; width: 130px; background: linear-gradient(90deg, #1b1d19, transparent); content: ""; pointer-events: none; }
+.coverage-section .split-heading > p { max-width: 540px; color: #3e403a; font-size: clamp(17px, 1.35vw, 20px); font-weight: 700; line-height: 1.6; }
+.coverage-card { position: relative; z-index: 1; display: grid; min-height: 610px; grid-template-columns: minmax(350px, .82fr) minmax(0, 1.18fr); overflow: hidden; border-radius: 32px; background: var(--graphite); box-shadow: 0 35px 85px rgba(17,18,15,.2); color: var(--white); }
+.coverage-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: clamp(34px, 3.7vw, 58px); background: linear-gradient(135deg, #292c25, #1b1d19); }
 .coverage-copy__eyebrow { display: inline-flex; width: fit-content; align-items: center; gap: 10px; color: var(--yellow); font-size: 10px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
 .coverage-copy__eyebrow::before { width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 6px rgba(255,213,0,.1); content: ""; }
-.coverage-copy h3 { margin: 28px 0 19px; font-family: "Druk Wide Cyr", "Montserrat", sans-serif; font-size: clamp(29px, 3.2vw, 50px); font-weight: 700; letter-spacing: -.025em; line-height: 1.1; text-transform: uppercase; }
-.coverage-copy > p { max-width: 430px; margin: 0; color: #bfc1ba; font-size: 13px; line-height: 1.7; }
+.coverage-copy h3 { margin: 28px 0 20px; font-family: "Druk Wide Cyr", "Montserrat", sans-serif; font-size: clamp(31px, 3.25vw, 52px); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; text-transform: uppercase; }
+.coverage-copy > p { max-width: 450px; margin: 0; color: #d6d8d0; font-size: clamp(15px, 1.15vw, 17px); font-weight: 650; line-height: 1.7; }
 .coverage-stats { display: grid; gap: 0; margin: 32px 0 0; }
-.coverage-stats > div { display: grid; grid-template-columns: 80px 1fr; gap: 14px; align-items: center; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.12); }
-.coverage-stats dt { color: var(--yellow); font-size: 21px; font-weight: 900; letter-spacing: -.04em; }
-.coverage-stats dd { margin: 0; color: #dedfd9; font-size: 9px; font-weight: 850; letter-spacing: .06em; line-height: 1.35; text-transform: uppercase; }
+.coverage-stats > div { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.15); }
+.coverage-stats dt { color: var(--yellow); font-size: 27px; font-weight: 900; letter-spacing: -.045em; }
+.coverage-stats dd { margin: 0; color: #f0f1eb; font-size: 10.5px; font-weight: 900; letter-spacing: .055em; line-height: 1.4; text-transform: uppercase; }
 .city-selection { display: none; }
-.belarus-map { position: relative; min-width: 0; min-height: 610px; overflow: hidden; background: radial-gradient(circle at 55% 48%, rgba(255,213,0,.11), transparent 37%), linear-gradient(145deg, #292c26, #20221e); isolation: isolate; }
+.belarus-map { position: relative; min-width: 0; min-height: 610px; overflow: hidden; background: radial-gradient(circle at 54% 48%, rgba(255,213,0,.2), transparent 42%), linear-gradient(145deg, #35382f, #20221e); isolation: isolate; }
 .belarus-map::before { position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; content: ""; mask-image: linear-gradient(90deg, transparent, #000 26%, #000); }
 .belarus-map__shape { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.belarus-outline { fill: url(#mapFill); stroke: rgba(255,255,255,.84); stroke-linejoin: round; stroke-width: 3; }
+.belarus-outline { fill: url(#mapFill); stroke: var(--yellow); stroke-linejoin: round; stroke-width: 5; }
+.belarus-border { fill: none; stroke: var(--yellow); stroke-linejoin: round; stroke-width: 5; pointer-events: none; }
+.map-inside { pointer-events: none; }
+.map-ring { fill: none; stroke: var(--ink); stroke-dasharray: 4 9; stroke-width: 1.5; opacity: .16; }
+.map-route { fill: none; stroke: var(--yellow-deep); stroke-dasharray: 7 8; stroke-linecap: round; stroke-width: 3.5; opacity: .62; }
+.map-route--secondary { stroke: var(--ink); stroke-width: 2.5; opacity: .22; }
+.map-watermark { fill: var(--ink); font-family: "Druk Wide Cyr", "Montserrat", sans-serif; font-size: 48px; font-weight: 700; letter-spacing: .04em; opacity: .1; }
 .city-marker { position: absolute; z-index: 3; top: var(--y); left: var(--x); transform: translate(-50%, -50%); }
 .city-marker button { position: relative; display: grid; width: 18px; height: 18px; padding: 0; border: 4px solid var(--yellow); border-radius: 50%; background: var(--ink); color: var(--ink); cursor: pointer; box-shadow: 0 0 0 8px rgba(255,213,0,.18), 0 0 22px rgba(255,213,0,.38); transition: background .2s ease, box-shadow .2s ease, transform .2s ease; }
 .city-marker button::after { position: absolute; inset: -13px; border: 1px solid rgba(255,213,0,.5); border-radius: 50%; content: ""; animation: cityPulse 2.2s ease-out infinite; }
@@ -555,19 +561,19 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .coverage-section .section-heading em { display: inline; padding: 0 .12em; }
   .coverage-card { min-height: 0; grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
   .coverage-copy { order: 2; padding: 28px 20px 24px; }
-  .coverage-copy::after { display: none; }
   .coverage-copy__eyebrow { font-size: 9px; }
-  .coverage-copy h3 { margin: 22px 0 14px; font-size: clamp(24px, 7.4vw, 32px); line-height: 1.15; }
-  .coverage-copy > p { font-size: 13px; line-height: 1.65; }
+  .coverage-section .split-heading > p { font-size: 15.5px; font-weight: 700; line-height: 1.6; }
+  .coverage-copy h3 { margin: 22px 0 15px; font-size: clamp(26px, 7.7vw, 34px); line-height: 1.16; }
+  .coverage-copy > p { font-size: 14.5px; line-height: 1.65; }
   .coverage-stats { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
   .coverage-stats > div { display: block; padding: 14px; border: 1px solid rgba(255,255,255,.12); border-radius: 13px; }
   .coverage-stats > div:last-child { grid-column: 1 / -1; }
-  .coverage-stats dt { font-size: 18px; }
-  .coverage-stats dd { margin-top: 5px; font-size: 8.5px; }
+  .coverage-stats dt { font-size: 21px; }
+  .coverage-stats dd { margin-top: 6px; font-size: 9.5px; line-height: 1.4; }
   .city-selection { display: grid; grid-template-columns: 1fr auto; gap: 5px 12px; align-items: end; margin-top: 18px; padding: 15px; border-radius: 14px; background: var(--yellow); color: var(--ink); }
-  .city-selection span { grid-column: 1 / -1; font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-  .city-selection strong { font-size: 16px; font-weight: 900; text-transform: uppercase; }
-  .city-selection b { font-size: 14px; font-weight: 900; }
+  .city-selection span { grid-column: 1 / -1; font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+  .city-selection strong { font-size: 18px; font-weight: 900; text-transform: uppercase; }
+  .city-selection b { font-size: 16px; font-weight: 900; }
   .belarus-map { min-height: 390px; }
   .belarus-map__shape { inset: 0; width: 100%; height: 100%; }
   .city-marker button { width: 15px; height: 15px; border-width: 3px; box-shadow: 0 0 0 6px rgba(255,213,0,.16); }
