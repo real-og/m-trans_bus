@@ -310,6 +310,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .brand-logo:hover, .brand-logo:focus-visible { border-color: rgba(17,18,15,.3); filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
 .brand-logo.is-active { border-color: var(--yellow-deep); background: #fff; box-shadow: 0 12px 28px rgba(17,18,15,.1); filter: grayscale(0); opacity: 1; }
 .brand-logo.is-active::after { opacity: 1; transform: scaleX(1); }
+.brand-logo--pinskdrev img { width: 92%; height: 92%; }
 .brand-logo--dark, .brand-logo--dark.is-active { background: #171812; }
 .campaign-carousel { position: relative; }
 .carousel-stage { position: relative; height: clamp(360px, 42vw, 590px); perspective: 1400px; }
