@@ -267,6 +267,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .city-marker button::after { position: absolute; inset: -13px; border: 1px solid rgba(255,213,0,.5); border-radius: 50%; content: ""; animation: cityPulse 2.2s ease-out infinite; }
 .city-marker button > span { position: absolute; top: 50%; left: 26px; padding: 7px 11px; border-radius: 9px; background: rgba(17,18,15,.9); color: var(--white); font-size: 10.5px; font-weight: 900; letter-spacing: .05em; line-height: 1; text-transform: uppercase; white-space: nowrap; transform: translateY(-50%); backdrop-filter: blur(8px); }
 .city-marker--right button > span { right: 26px; left: auto; }
+.city-marker--label-up button > span { top: auto; right: auto; bottom: 27px; left: 50%; transform: translateX(-50%); }
 .city-marker:hover button, .city-marker:focus-within button, .city-marker.is-active button { background: var(--yellow); box-shadow: 0 0 0 10px rgba(255,213,0,.22), 0 0 30px rgba(255,213,0,.56); transform: scale(1.12); }
 .city-marker button:focus-visible { outline: 3px solid var(--white); outline-offset: 8px; }
 .city-tooltip { position: absolute; right: auto; bottom: calc(100% + 24px); left: 50%; display: grid; min-width: 132px; gap: 4px; padding: 13px 15px; border: 1px solid rgba(255,213,0,.4); border-radius: 13px; background: var(--ink); box-shadow: 0 16px 35px rgba(0,0,0,.3); opacity: 0; pointer-events: none; transform: translate(-50%, 8px); transition: opacity .18s ease, transform .18s ease; }
@@ -579,6 +580,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .city-marker button::after { inset: -10px; }
   .city-marker button > span { left: 20px; padding: 6px 8px; font-size: 8px; }
   .city-marker--right button > span { right: 20px; left: auto; }
+  .city-marker--label-up button > span { top: auto; right: auto; bottom: 22px; left: 50%; transform: translateX(-50%); }
   .city-tooltip { display: none; }
   .city-marker:hover button, .city-marker:focus-within button, .city-marker.is-active button { box-shadow: 0 0 0 8px rgba(255,213,0,.22), 0 0 24px rgba(255,213,0,.5); }
   .belarus-map__hint { right: 12px; bottom: 12px; font-size: 7px; }
