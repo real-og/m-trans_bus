@@ -53,6 +53,32 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
+document.querySelectorAll("[data-city-map]").forEach((map) => {
+  const markers = [...map.querySelectorAll(".city-marker")];
+  const selectedCity = map.querySelector("[data-selected-city]");
+  const selectedPrice = map.querySelector("[data-selected-price]");
+
+  function selectCity(marker) {
+    const button = marker.querySelector("[data-city-button]");
+    if (!button) return;
+
+    markers.forEach((item) => {
+      item.classList.toggle("is-active", item === marker);
+      item.querySelector("[data-city-button]")?.setAttribute("aria-pressed", String(item === marker));
+    });
+
+    if (selectedCity) selectedCity.textContent = button.dataset.city;
+    if (selectedPrice) selectedPrice.textContent = button.dataset.price;
+  }
+
+  markers.forEach((marker) => {
+    const button = marker.querySelector("[data-city-button]");
+    button?.addEventListener("click", () => selectCity(marker));
+    button?.addEventListener("mouseenter", () => selectCity(marker));
+    button?.addEventListener("focus", () => selectCity(marker));
+  });
+});
+
 document.querySelectorAll("[data-lead-form]").forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
