@@ -53,30 +53,57 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
-document.querySelectorAll("[data-city-map]").forEach((map) => {
-  const markers = [...map.querySelectorAll(".city-marker")];
-  const selectedCity = map.querySelector("[data-selected-city]");
-  const selectedPrice = map.querySelector("[data-selected-price]");
+document.querySelectorAll("[data-region-map]").forEach((map) => {
+  const regions = [...map.querySelectorAll("[data-region]")];
+  const selectedRegion = map.querySelector("[data-selected-region]");
+  const selectedCities = map.querySelector("[data-selected-cities]");
+  const popover = map.querySelector("[data-region-popover]");
+  const popoverRegion = map.querySelector("[data-popover-region]");
+  const popoverCities = map.querySelector("[data-popover-cities]");
 
-  function selectCity(marker) {
-    const button = marker.querySelector("[data-city-button]");
-    if (!button) return;
-
-    markers.forEach((item) => {
-      item.classList.toggle("is-active", item === marker);
-      item.querySelector("[data-city-button]")?.setAttribute("aria-pressed", String(item === marker));
-    });
-
-    if (selectedCity) selectedCity.textContent = button.dataset.city;
-    if (selectedPrice) selectedPrice.textContent = button.dataset.price;
+  function renderCities(list, cities) {
+    if (!list) return;
+    list.replaceChildren(...cities.map((city) => {
+      const item = document.createElement("li");
+      item.textContent = city;
+      return item;
+    }));
   }
 
-  markers.forEach((marker) => {
-    const button = marker.querySelector("[data-city-button]");
-    button?.addEventListener("click", () => selectCity(marker));
-    button?.addEventListener("mouseenter", () => selectCity(marker));
-    button?.addEventListener("focus", () => selectCity(marker));
+  function selectRegion(region) {
+    const cities = region.dataset.cities.split(",").map((city) => city.trim()).filter(Boolean);
+
+    regions.forEach((item) => {
+      const isSelected = item === region;
+      item.classList.toggle("is-active", isSelected);
+      item.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    if (selectedRegion) selectedRegion.textContent = region.dataset.region;
+    if (popoverRegion) popoverRegion.textContent = region.dataset.region;
+    renderCities(selectedCities, cities);
+    renderCities(popoverCities, cities);
+
+    if (popover) {
+      popover.style.setProperty("--popover-x", `${region.dataset.popoverX}%`);
+      popover.style.setProperty("--popover-y", `${region.dataset.popoverY}%`);
+    }
+  }
+
+  regions.forEach((region) => {
+    region.addEventListener("click", () => selectRegion(region));
+    region.addEventListener("mouseenter", () => selectRegion(region));
+    region.addEventListener("focus", () => selectRegion(region));
+    region.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectRegion(region);
+      }
+    });
   });
+
+  const initialRegion = regions.find((region) => region.classList.contains("is-active")) || regions[0];
+  if (initialRegion) selectRegion(initialRegion);
 });
 
 document.querySelectorAll("[data-lead-form]").forEach((form) => {

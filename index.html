@@ -14,7 +14,7 @@
   <meta property="og:description" content="Мобильный билборд на колёсах, который работает до 17 часов в сутки.">
   <meta property="og:image" content="assets/images/hero-bus-v2.webp">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260813-14">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260817-01">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"ProfessionalService","name":"M-TRANS.BY","description":"Размещение рекламы на задней части автобусов по Беларуси","telephone":"+375296065651","email":"info@m-trans.by","areaServed":{"@type":"Country","name":"Беларусь"},"sameAs":["https://t.me/M_TRANS_BY"]}
   </script>
@@ -108,64 +108,56 @@
         <div><span class="section-index">05 / География</span><h2>Реклама <em>по всей Беларуси</em></h2></div>
         <p>Запускаем рекламу на городских автобусах в шести крупнейших городах страны.</p>
       </div>
-      <div class="coverage-card" data-city-map>
+      <div class="coverage-card" data-region-map>
         <div class="coverage-copy">
-          <span class="coverage-copy__eyebrow">Карта размещений</span>
-          <h3>6&nbsp;городов.<br>Одна рекламная сеть.</h3>
-          <p>Подберём город, маршрут и количество автобусов под вашу аудиторию и бюджет.</p>
+          <span class="coverage-copy__eyebrow">Интерактивная география</span>
+          <h3>Выберите область</h3>
+          <p>Наводите на области на карте или нажимайте на них, чтобы увидеть города присутствия.</p>
           <dl class="coverage-stats">
-            <div><dt>6</dt><dd>областных центров</dd></div>
+            <div><dt>6</dt><dd>областей Беларуси</dd></div>
+            <div><dt>6</dt><dd>городов присутствия</dd></div>
             <div><dt>1</dt><dd>автобус для старта</dd></div>
-            <div><dt>3</dt><dd>дня до запуска кампании</dd></div>
           </dl>
-          <div class="city-selection" aria-live="polite">
-            <span>Выбранный город</span>
-            <strong data-selected-city>Минск</strong>
-            <b data-selected-price>от 290 р.</b>
+          <div class="region-selection" aria-live="polite">
+            <span>Сейчас выбрана</span>
+            <strong data-selected-region>Минская область</strong>
+            <small>Доступные города</small>
+            <ul data-selected-cities><li>Минск</li></ul>
           </div>
         </div>
-        <div class="belarus-map" role="group" aria-label="Города Беларуси, где доступно размещение рекламы">
+        <div class="belarus-map" role="group" aria-label="Интерактивная карта областей Беларуси">
           <div class="belarus-map__canvas">
-          <svg class="belarus-map__shape" viewBox="0 0 700 560" role="img" aria-label="Карта Беларуси">
+          <svg class="belarus-map__shape" viewBox="0 0 850.394 724.689" role="img" aria-label="Шесть областей Беларуси">
             <defs>
-              <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".58" stop-color="#f7f4d4"/><stop offset="1" stop-color="#ffe45a"/></linearGradient>
               <pattern id="mapGrid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#11120f" stroke-width="1" opacity=".1"/></pattern>
               <filter id="mapShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="17" flood-color="#000" flood-opacity=".38"/><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ffd500" flood-opacity=".2"/></filter>
-              <path id="belarusCountry" d="M362.3 60 L418.4 82.8 L426 105.3 L454 94.4 L506.1 116.1 L511.3 158.7 L499.9 183.2 L533.3 242.6 L555 259.1 L551.8 275.5 L587.8 291.5 L603.2 315.6 L582.4 335.5 L539.4 332.3 L529.1 340.8 L541.6 370.9 L554.8 429 L509 434.4 L492.5 454.3 L489.1 500 L467.9 491.2 L419.8 495.6 L405.8 474.4 L385.8 490.2 L365.7 477.1 L323.7 475.2 L264.2 453.5 L210.3 446.4 L169 448.4 L139.8 473 L114.3 476.5 L113.3 436.1 L96.8 394.1 L128.8 375.6 L129.1 339.4 L114.3 304.9 L112 264.7 L163.6 265.4 L221.5 231.2 L233.8 180 L277.6 150.9 L272.6 110.3 L305 95 Z"/>
-              <clipPath id="belarusClip"><use href="#belarusCountry"/></clipPath>
             </defs>
-            <!-- Public-domain country boundary adapted from Natural Earth. -->
-            <use class="belarus-outline" href="#belarusCountry" filter="url(#mapShadow)"/>
-            <g class="map-inside" clip-path="url(#belarusClip)">
-              <rect x="90" y="50" width="530" height="460" fill="url(#mapGrid)"/>
-              <path class="city-connection" d="M329.5 265.5L470.4 148.8"/>
-              <path class="city-connection" d="M329.5 265.5L130.2 286.8"/>
-              <path class="city-connection" d="M329.5 265.5L477.9 265.8"/>
-              <path class="city-connection" d="M329.5 265.5L122.9 429.4"/>
-              <path class="city-connection" d="M329.5 265.5L511.5 398.8"/>
+            <g class="oblasts" filter="url(#mapShadow)">
+              <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-vitebsk" tabindex="0" role="button" data-region="Витебская область" data-cities="Витебск" data-popover-x="66" data-popover-y="20" aria-label="Витебская область. Доступный город: Витебск"/>
+              <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-grodno" tabindex="0" role="button" data-region="Гродненская область" data-cities="Гродно" data-popover-x="23" data-popover-y="38" aria-label="Гродненская область. Доступный город: Гродно"/>
+              <use class="coverage-region is-active" href="assets/images/belarus-oblasts.svg#region-minsk" tabindex="0" role="button" data-region="Минская область" data-cities="Минск" data-popover-x="48" data-popover-y="40" aria-label="Минская область. Доступный город: Минск"/>
+              <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-mogilev" tabindex="0" role="button" data-region="Могилёвская область" data-cities="Могилёв" data-popover-x="72" data-popover-y="43" aria-label="Могилёвская область. Доступный город: Могилёв"/>
+              <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-brest" tabindex="0" role="button" data-region="Брестская область" data-cities="Брест" data-popover-x="27" data-popover-y="72" aria-label="Брестская область. Доступный город: Брест"/>
+              <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-gomel" tabindex="0" role="button" data-region="Гомельская область" data-cities="Гомель" data-popover-x="68" data-popover-y="72" aria-label="Гомельская область. Доступный город: Гомель"/>
             </g>
-            <use class="belarus-border" href="#belarusCountry"/>
+            <g class="map-city-labels" aria-hidden="true">
+              <g transform="translate(585 166)"><circle r="7"/><text x="15" y="5">Витебск</text></g>
+              <g transform="translate(126 366)"><circle r="7"/><text x="15" y="5">Гродно</text></g>
+              <g transform="translate(409 350)"><circle r="8"/><text x="15" y="5">Минск</text></g>
+              <g transform="translate(659 363)"><circle r="7"/><text x="15" y="5">Могилёв</text></g>
+              <g transform="translate(139 615)"><circle r="7"/><text x="15" y="5">Брест</text></g>
+              <g transform="translate(690 565)"><circle r="7"/><text x="15" y="5">Гомель</text></g>
+            </g>
           </svg>
-          <div class="city-marker city-marker--right city-marker--below" style="--x:67.2%;--y:26.6%">
-            <button type="button" data-city-button data-city="Витебск" data-price="от 290 р." aria-label="Витебск — стоимость от 290 рублей"><span>Витебск</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
-          </div>
-          <div class="city-marker city-marker--label-up-mobile" style="--x:18.6%;--y:51.2%">
-            <button type="button" data-city-button data-city="Гродно" data-price="от 290 р." aria-label="Гродно — стоимость от 290 рублей"><span>Гродно</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
-          </div>
-          <div class="city-marker city-marker--right city-marker--label-down-mobile is-active" style="--x:47.1%;--y:47.4%">
-            <button type="button" data-city-button data-city="Минск" data-price="от 290 р." aria-label="Минск — стоимость от 290 рублей" aria-pressed="true"><span>Минск</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
-          </div>
-          <div class="city-marker" style="--x:68.3%;--y:47.5%">
-            <button type="button" data-city-button data-city="Могилёв" data-price="от 290 р." aria-label="Могилёв — стоимость от 290 рублей"><span>Могилёв</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
-          </div>
-          <div class="city-marker city-marker--below city-marker--label-up" style="--x:17.6%;--y:76.7%">
-            <button type="button" data-city-button data-city="Брест" data-price="от 290 р." aria-label="Брест — стоимость от 290 рублей"><span>Брест</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
-          </div>
-          <div class="city-marker city-marker--right" style="--x:73.1%;--y:71.2%">
-            <button type="button" data-city-button data-city="Гомель" data-price="от 290 р." aria-label="Гомель — стоимость от 290 рублей"><span>Гомель</span></button><div class="city-tooltip"><small>Стоимость</small><strong>от 290 р.</strong></div>
+          <div class="region-popover" data-region-popover aria-hidden="false">
+            <span>Область</span>
+            <strong data-popover-region>Минская область</strong>
+            <small>Доступные города</small>
+            <ul data-popover-cities><li>Минск</li></ul>
           </div>
           </div>
-          <p class="belarus-map__hint">Наведите или нажмите на город</p>
+          <p class="belarus-map__hint">Наведите или нажмите на область</p>
+          <a class="map-source" href="https://commons.wikimedia.org/wiki/File:Belarus_blank.svg" target="_blank" rel="noreferrer">Границы областей: Wikimedia Commons, CC BY-SA 3.0</a>
         </div>
       </div>
     </section>
@@ -271,6 +263,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260813-11" defer></script>
+  <script src="assets/js/main.js?v=20260817-01" defer></script>
 </body>
 </html>
