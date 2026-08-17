@@ -53,39 +53,7 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
-async function hydrateRegionGeometry(map) {
-  const uses = [...map.querySelectorAll("use[data-region]")];
-  if (!uses.length) return;
-
-  const response = await fetch(new URL("assets/images/belarus-oblasts.svg?v=20260817-02", document.baseURI));
-  if (!response.ok) throw new Error(`Не удалось загрузить карту: ${response.status}`);
-
-  const source = new DOMParser().parseFromString(await response.text(), "image/svg+xml");
-  if (source.querySelector("parsererror")) throw new Error("Файл карты содержит некорректный SVG");
-
-  uses.forEach((use) => {
-    const reference = use.getAttribute("href") || use.getAttribute("xlink:href") || "";
-    const sourcePath = source.getElementById(reference.split("#").pop());
-    if (!sourcePath) throw new Error(`В файле карты отсутствует контур ${reference}`);
-
-    const region = document.importNode(sourcePath, true);
-    [...use.attributes].forEach(({ name, value }) => {
-      if (name !== "href" && name !== "xlink:href") region.setAttribute(name, value);
-    });
-    use.replaceWith(region);
-  });
-
-  map.classList.add("is-map-ready");
-}
-
-async function initRegionMap(map) {
-  try {
-    await hydrateRegionGeometry(map);
-  } catch (error) {
-    map.classList.add("has-map-error");
-    console.error(error);
-  }
-
+function initRegionMap(map) {
   const regions = [...map.querySelectorAll("[data-region]")];
   const selectedRegion = map.querySelector("[data-selected-region]");
   const selectedCities = map.querySelector("[data-selected-cities]");
@@ -93,6 +61,7 @@ async function initRegionMap(map) {
   const popoverRegion = map.querySelector("[data-popover-region]");
   const popoverCities = map.querySelector("[data-popover-cities]");
   const regionLayer = map.querySelector(".oblasts");
+  let activeRegion;
 
   function renderCities(list, cities) {
     if (!list) return;
@@ -104,6 +73,8 @@ async function initRegionMap(map) {
   }
 
   function selectRegion(region) {
+    if (!region || activeRegion === region) return;
+    activeRegion = region;
     const cities = region.dataset.cities.split(",").map((city) => city.trim()).filter(Boolean);
 
     regions.forEach((item) => {
@@ -124,7 +95,6 @@ async function initRegionMap(map) {
   }
 
   regions.forEach((region) => {
-    region.addEventListener("click", () => selectRegion(region));
     region.addEventListener("focus", () => selectRegion(region));
     region.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -134,10 +104,15 @@ async function initRegionMap(map) {
     });
   });
 
-  regionLayer?.addEventListener("pointerover", (event) => {
+  const selectFromPointer = (event) => {
     const region = event.target.closest?.("[data-region]");
     if (region && regionLayer.contains(region)) selectRegion(region);
-  });
+  };
+
+  regionLayer?.addEventListener("mouseover", selectFromPointer);
+  regionLayer?.addEventListener("mousemove", selectFromPointer);
+  regionLayer?.addEventListener("pointerdown", selectFromPointer);
+  regionLayer?.addEventListener("click", selectFromPointer);
 
   const initialRegion = regions.find((region) => region.classList.contains("is-active")) || regions[0];
   if (initialRegion) selectRegion(initialRegion);
