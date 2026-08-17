@@ -53,7 +53,39 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
-document.querySelectorAll("[data-region-map]").forEach((map) => {
+async function hydrateRegionGeometry(map) {
+  const uses = [...map.querySelectorAll("use[data-region]")];
+  if (!uses.length) return;
+
+  const response = await fetch(new URL("assets/images/belarus-oblasts.svg?v=20260817-02", document.baseURI));
+  if (!response.ok) throw new Error(`Не удалось загрузить карту: ${response.status}`);
+
+  const source = new DOMParser().parseFromString(await response.text(), "image/svg+xml");
+  if (source.querySelector("parsererror")) throw new Error("Файл карты содержит некорректный SVG");
+
+  uses.forEach((use) => {
+    const reference = use.getAttribute("href") || use.getAttribute("xlink:href") || "";
+    const sourcePath = source.getElementById(reference.split("#").pop());
+    if (!sourcePath) throw new Error(`В файле карты отсутствует контур ${reference}`);
+
+    const region = document.importNode(sourcePath, true);
+    [...use.attributes].forEach(({ name, value }) => {
+      if (name !== "href" && name !== "xlink:href") region.setAttribute(name, value);
+    });
+    use.replaceWith(region);
+  });
+
+  map.classList.add("is-map-ready");
+}
+
+async function initRegionMap(map) {
+  try {
+    await hydrateRegionGeometry(map);
+  } catch (error) {
+    map.classList.add("has-map-error");
+    console.error(error);
+  }
+
   const regions = [...map.querySelectorAll("[data-region]")];
   const selectedRegion = map.querySelector("[data-selected-region]");
   const selectedCities = map.querySelector("[data-selected-cities]");
@@ -104,7 +136,9 @@ document.querySelectorAll("[data-region-map]").forEach((map) => {
 
   const initialRegion = regions.find((region) => region.classList.contains("is-active")) || regions[0];
   if (initialRegion) selectRegion(initialRegion);
-});
+}
+
+document.querySelectorAll("[data-region-map]").forEach(initRegionMap);
 
 document.querySelectorAll("[data-lead-form]").forEach((form) => {
   form.addEventListener("submit", (event) => {

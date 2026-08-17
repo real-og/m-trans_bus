@@ -265,6 +265,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .belarus-map::before { position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 32px 32px; content: ""; mask-image: radial-gradient(circle at center, #000 0 50%, transparent 78%); pointer-events: none; }
 .belarus-map__canvas { position: relative; width: min(100%, 1050px); aspect-ratio: 850.394 / 724.689; }
 .belarus-map__shape { position: absolute; inset: 1%; width: 98%; height: 98%; overflow: visible; }
+.oblasts-fallback { opacity: .92; pointer-events: none; transition: opacity .15s ease; }
+.is-map-ready .oblasts-fallback { opacity: 0; }
 .coverage-region { fill: #f1efe7; stroke: #242620; stroke-linejoin: round; stroke-width: 5; cursor: pointer; transition: fill .22s ease, filter .22s ease, opacity .22s ease; }
 .coverage-region:nth-child(2n) { fill: #e8e6dd; }
 .coverage-region:hover, .coverage-region:focus, .coverage-region.is-active { fill: var(--yellow); filter: drop-shadow(0 0 13px rgba(255,213,0,.45)); outline: 0; }
