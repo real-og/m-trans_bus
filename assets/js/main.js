@@ -80,8 +80,9 @@ function initRegionMap(map) {
     regions.forEach((item) => {
       const isSelected = item === region;
       item.classList.toggle("is-active", isSelected);
-      item.setAttribute("aria-pressed", String(isSelected));
     });
+
+    map.classList.add("has-region-hover");
 
     if (selectedRegion) selectedRegion.textContent = region.dataset.region;
     if (popoverRegion) popoverRegion.textContent = region.dataset.region;
@@ -91,31 +92,33 @@ function initRegionMap(map) {
     if (popover) {
       popover.style.setProperty("--popover-x", `${region.dataset.popoverX}%`);
       popover.style.setProperty("--popover-y", `${region.dataset.popoverY}%`);
+      popover.setAttribute("aria-hidden", "false");
     }
   }
 
-  regions.forEach((region) => {
-    region.addEventListener("focus", () => selectRegion(region));
-    region.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        selectRegion(region);
-      }
-    });
-  });
+  function resetRegion() {
+    activeRegion = undefined;
+    regions.forEach((region) => region.classList.remove("is-active"));
+    map.classList.remove("has-region-hover");
+    if (selectedRegion) selectedRegion.textContent = "Наведите на область";
+    renderCities(selectedCities, ["Города появятся здесь"]);
+    if (popoverRegion) popoverRegion.textContent = "Область";
+    renderCities(popoverCities, ["Город"]);
+    popover?.setAttribute("aria-hidden", "true");
+  }
 
   const selectFromPointer = (event) => {
     const region = event.target.closest?.("[data-region]");
     if (region && regionLayer.contains(region)) selectRegion(region);
   };
 
-  regionLayer?.addEventListener("mouseover", selectFromPointer);
-  regionLayer?.addEventListener("mousemove", selectFromPointer);
-  regionLayer?.addEventListener("pointerdown", selectFromPointer);
-  regionLayer?.addEventListener("click", selectFromPointer);
+  if (window.matchMedia("(hover: hover)").matches) {
+    regionLayer?.addEventListener("mouseover", selectFromPointer);
+    regionLayer?.addEventListener("mousemove", selectFromPointer);
+    regionLayer?.addEventListener("mouseleave", resetRegion);
+  }
 
-  const initialRegion = regions.find((region) => region.classList.contains("is-active")) || regions[0];
-  if (initialRegion) selectRegion(initialRegion);
+  resetRegion();
 }
 
 document.querySelectorAll("[data-region-map]").forEach(initRegionMap);
