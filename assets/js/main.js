@@ -92,6 +92,7 @@ async function initRegionMap(map) {
   const popover = map.querySelector("[data-region-popover]");
   const popoverRegion = map.querySelector("[data-popover-region]");
   const popoverCities = map.querySelector("[data-popover-cities]");
+  const regionLayer = map.querySelector(".oblasts");
 
   function renderCities(list, cities) {
     if (!list) return;
@@ -124,7 +125,6 @@ async function initRegionMap(map) {
 
   regions.forEach((region) => {
     region.addEventListener("click", () => selectRegion(region));
-    region.addEventListener("mouseenter", () => selectRegion(region));
     region.addEventListener("focus", () => selectRegion(region));
     region.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -132,6 +132,11 @@ async function initRegionMap(map) {
         selectRegion(region);
       }
     });
+  });
+
+  regionLayer?.addEventListener("pointerover", (event) => {
+    const region = event.target.closest?.("[data-region]");
+    if (region && regionLayer.contains(region)) selectRegion(region);
   });
 
   const initialRegion = regions.find((region) => region.classList.contains("is-active")) || regions[0];

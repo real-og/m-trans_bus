@@ -14,7 +14,7 @@
   <meta property="og:description" content="Мобильный билборд на колёсах, который работает до 17 часов в сутки.">
   <meta property="og:image" content="assets/images/hero-bus-v2.webp">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260817-02">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260817-03">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"ProfessionalService","name":"M-TRANS.BY","description":"Размещение рекламы на задней части автобусов по Беларуси","telephone":"+375296065651","email":"info@m-trans.by","areaServed":{"@type":"Country","name":"Беларусь"},"sameAs":["https://t.me/M_TRANS_BY"]}
   </script>
@@ -130,10 +130,17 @@
           <svg class="belarus-map__shape" viewBox="0 0 850.394 724.689" role="img" aria-label="Шесть областей Беларуси">
             <defs>
               <pattern id="mapGrid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#11120f" stroke-width="1" opacity=".1"/></pattern>
-              <filter id="mapShadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="17" flood-color="#000" flood-opacity=".38"/><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ffd500" flood-opacity=".2"/></filter>
+              <filter id="countryOutline" x="-25%" y="-25%" width="150%" height="160%" color-interpolation-filters="sRGB">
+                <feMorphology in="SourceAlpha" operator="dilate" radius="8" result="expanded"/>
+                <feFlood flood-color="#ffd500" result="outlineColor"/>
+                <feComposite in="outlineColor" in2="expanded" operator="in" result="outlineFill"/>
+                <feComposite in="outlineFill" in2="SourceAlpha" operator="out" result="outline"/>
+                <feDropShadow in="SourceAlpha" dx="0" dy="18" stdDeviation="17" flood-color="#000" flood-opacity=".45" result="shadow"/>
+                <feMerge><feMergeNode in="shadow"/><feMergeNode in="outline"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
             </defs>
             <image class="oblasts-fallback" href="assets/images/belarus-oblasts.svg?v=20260817-02" x="0" y="0" width="850.394" height="724.689" aria-hidden="true"/>
-            <g class="oblasts" filter="url(#mapShadow)">
+            <g class="oblasts" filter="url(#countryOutline)">
               <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-vitebsk" tabindex="0" role="button" data-region="Витебская область" data-cities="Витебск" data-popover-x="66" data-popover-y="20" aria-label="Витебская область. Доступный город: Витебск"/>
               <use class="coverage-region" href="assets/images/belarus-oblasts.svg#region-grodno" tabindex="0" role="button" data-region="Гродненская область" data-cities="Гродно" data-popover-x="23" data-popover-y="38" aria-label="Гродненская область. Доступный город: Гродно"/>
               <use class="coverage-region is-active" href="assets/images/belarus-oblasts.svg#region-minsk" tabindex="0" role="button" data-region="Минская область" data-cities="Минск" data-popover-x="48" data-popover-y="40" aria-label="Минская область. Доступный город: Минск"/>
@@ -264,6 +271,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260817-02" defer></script>
+  <script src="assets/js/main.js?v=20260817-03" defer></script>
 </body>
 </html>
