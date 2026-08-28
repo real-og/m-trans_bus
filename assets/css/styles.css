@@ -536,7 +536,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .advantage-layout { gap: 36px; }
   .solution-visuals { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: 12px; }
   .pov-frame, .attention-frame { min-height: 0; grid-row: auto; }
-  .pov-frame, .quality-image { aspect-ratio: 4 / 5; }
+  .pov-frame { aspect-ratio: 3 / 2; }
+  .quality-image { aspect-ratio: 4 / 5; }
   .attention-frame { aspect-ratio: 16 / 11; border-radius: 22px; }
   .attention-frame img { object-position: center; }
   .pov-frame figcaption, .attention-frame figcaption { right: 18px; bottom: 18px; left: 18px; }
@@ -579,7 +580,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .coverage-stats dt { font-size: 21px; }
   .coverage-stats dd { margin-top: 0; font-size: 10.5px; line-height: 1.4; }
   .belarus-map { min-height: clamp(390px, 112vw, 510px); order: -1; }
-  .belarus-map__canvas { width: 112%; margin-left: -6%; }
+  .belarus-map__canvas { width: 100%; margin-left: 0; }
   .belarus-map__shape { inset: 0; width: 100%; height: 100%; }
   .coverage-region { stroke-width: 6; }
   .map-city-labels circle { r: 8px; stroke-width: 6; }
@@ -609,6 +610,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .brands-heading h2 em, .faq-title h2 em { display: inline-block; padding: 0 .16em; border: 0; border-radius: .12em; background: var(--yellow); box-shadow: none; color: var(--ink); -webkit-text-fill-color: var(--ink); -webkit-text-stroke: 0; line-height: inherit; }
   .brand-selector { max-width: none; margin: 0 var(--gutter) 34px; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; gap: 10px; overflow: visible; }
   .brand-logo { height: 102px; padding: 8px; border-radius: 14px; }
+  .brand-logo--pinskdrev img { width: 84%; height: 84%; }
   .carousel-stage { height: clamp(250px, 74vw, 340px); }
   .carousel-stage .carousel-slide { width: 84vw; height: auto; aspect-ratio: 3 / 2; border-radius: 18px; }
   .carousel-stage .is-prev { transform: translate(-94%, -50%) scale(.65); }
