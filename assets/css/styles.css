@@ -298,15 +298,16 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .brands-section { padding: clamp(88px, 9vw, 138px) 0; overflow: hidden; background: #ebeae4; }
 .brands-heading { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin: 0 var(--gutter) 34px; }
 .brands-heading > p { max-width: 380px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; text-align: right; }
-.brand-selector { display: grid; width: min(calc(100% - clamp(80px, 14vw, 288px)), 1720px); max-width: none; margin: 0 auto 52px; padding: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.15vw, 22px); }
-.brand-logo { position: relative; display: grid; min-width: 0; height: clamp(154px, 11vw, 224px); padding: clamp(10px, .9vw, 16px); place-items: center; overflow: hidden; border: 1px solid rgba(17,18,15,.12); border-radius: clamp(20px, 1.35vw, 28px); background: rgba(255,255,255,.78); cursor: pointer; filter: grayscale(1); opacity: .7; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, filter .25s ease, opacity .25s ease, transform .25s ease; }
+.brand-selector { display: grid; width: auto; max-width: none; margin: 0 var(--gutter) 52px; padding: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.brand-logo { position: relative; display: grid; min-width: 0; height: clamp(138px, 8vw, 170px); padding: clamp(10px, .75vw, 14px); place-items: center; overflow: hidden; border: 1px solid rgba(17,18,15,.12); border-radius: clamp(20px, 1.2vw, 24px); background: rgba(255,255,255,.78); cursor: pointer; filter: grayscale(1); opacity: .7; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, filter .25s ease, opacity .25s ease, transform .25s ease; }
 .brand-logo::after { position: absolute; right: 10px; bottom: 7px; left: 10px; height: 3px; border-radius: 4px; background: var(--yellow-deep); opacity: 0; transform: scaleX(.35); transition: opacity .25s ease, transform .25s ease; content: ""; }
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .brand-logo:hover, .brand-logo:focus-visible { border-color: rgba(17,18,15,.3); filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
 .brand-logo.is-active { border-color: var(--yellow-deep); background: #fff; box-shadow: 0 12px 28px rgba(17,18,15,.1); filter: grayscale(0); opacity: 1; }
 .brand-logo.is-active::after { opacity: 1; transform: scaleX(1); }
-.brand-logo--pinskdrev img { width: 92%; height: 92%; }
+.brand-logo--pinskdrev img { width: 88%; height: 88%; }
 .brand-logo--dark, .brand-logo--dark.is-active { background: #171812; }
+.brand-logo--dark img { width: 92%; height: 92%; }
 .campaign-carousel { position: relative; }
 .carousel-stage { position: relative; height: clamp(360px, 42vw, 590px); perspective: 1400px; }
 .carousel-stage .carousel-slide { position: absolute; top: 50%; left: 50%; width: min(58vw, 820px); height: min(38vw, 540px); margin: 0; padding: 0; overflow: hidden; border: 0; border-radius: 28px; background: var(--graphite); box-shadow: 0 28px 75px rgba(17,18,15,.18); opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(.68); transition: transform .55s cubic-bezier(.22,.8,.22,1), opacity .4s ease, filter .4s ease; }
