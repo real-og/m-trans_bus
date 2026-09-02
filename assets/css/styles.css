@@ -300,12 +300,12 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .brands-heading > p { max-width: 380px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; text-align: right; }
 .brand-selector { display: grid; width: auto; max-width: none; margin: 0 var(--gutter) 52px; padding: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
 .brand-logo { position: relative; display: grid; min-width: 0; height: clamp(138px, 8vw, 170px); padding: clamp(10px, .75vw, 14px); place-items: center; overflow: hidden; border: 1px solid rgba(17,18,15,.12); border-radius: clamp(20px, 1.2vw, 24px); background: rgba(255,255,255,.78); cursor: pointer; filter: grayscale(1); opacity: .7; transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, filter .25s ease, opacity .25s ease, transform .25s ease; }
-.brand-logo::after { position: absolute; right: 10px; bottom: 7px; left: 10px; height: 3px; border-radius: 4px; background: var(--yellow-deep); opacity: 0; transform: scaleX(.35); transition: opacity .25s ease, transform .25s ease; content: ""; }
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .brand-logo:hover, .brand-logo:focus-visible { border-color: rgba(17,18,15,.3); filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
-.brand-logo.is-active { border-color: var(--yellow-deep); background: #fff; box-shadow: 0 12px 28px rgba(17,18,15,.1); filter: grayscale(0); opacity: 1; }
-.brand-logo.is-active::after { opacity: 1; transform: scaleX(1); }
-.brand-logo--pinskdrev img { width: 88%; height: 88%; }
+.brand-logo.is-active { border: 2px solid var(--yellow); background: #fff; box-shadow: 0 0 0 4px rgba(255,213,0,.48), 0 0 30px rgba(255,213,0,.38), 0 18px 38px rgba(150,122,0,.24), inset 0 0 24px rgba(255,213,0,.12); filter: grayscale(0); opacity: 1; transform: translateY(-2px); }
+.brand-logo--pinskdrev img { width: 82%; height: 82%; }
+.brand-logo.brand-logo--full-bleed { padding: 0; background: var(--graphite); }
+.brand-logo--full-bleed img { width: 100%; height: 100%; object-fit: cover; }
 .brand-logo--dark, .brand-logo--dark.is-active { background: #171812; }
 .brand-logo--dark img { width: 92%; height: 92%; }
 .campaign-carousel { position: relative; }
@@ -447,7 +447,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 }
 
 @media (min-width: 1441px) {
-  .brand-logo--pinskdrev img { width: 86%; height: 86%; transform: translateY(-2px); }
+  .brand-logo--pinskdrev img { width: 80%; height: 80%; transform: translateY(-2px); }
   .brand-logo--dark img { width: 90%; height: 90%; transform: translateY(-2px); }
 }
 
