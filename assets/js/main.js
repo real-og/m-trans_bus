@@ -70,11 +70,13 @@ function initRegionMap(map) {
   }
 
   function selectRegion(region) {
-    if (!region || activeRegion === region) return;
+    if (!region) return;
     const cities = region.dataset.cities.split(",").map((city) => city.trim()).filter(Boolean);
 
     activeRegion?.classList.remove("is-active");
+    activeRegion?.setAttribute("aria-pressed", "false");
     region.classList.add("is-active");
+    region.setAttribute("aria-pressed", "true");
     activeRegion = region;
 
     map.classList.add("has-region-hover");
@@ -91,6 +93,7 @@ function initRegionMap(map) {
 
   function resetRegion() {
     activeRegion?.classList.remove("is-active");
+    activeRegion?.setAttribute("aria-pressed", "false");
     activeRegion = undefined;
     map.classList.remove("has-region-hover");
     if (popoverRegion) popoverRegion.textContent = "Область";
@@ -107,6 +110,15 @@ function initRegionMap(map) {
     regionLayer?.addEventListener("mouseover", selectFromPointer);
     regionLayer?.addEventListener("mouseleave", resetRegion);
   }
+
+  regionLayer?.addEventListener("click", selectFromPointer);
+  regionLayer?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const region = event.target.closest?.("[data-region]");
+    if (!region || !regionLayer.contains(region)) return;
+    event.preventDefault();
+    selectRegion(region);
+  });
 
   resetRegion();
 }
