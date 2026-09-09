@@ -294,10 +294,10 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .price-offer__benefits li { padding: 11px 14px; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; color: var(--white); font-size: 12px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
 .price-offer__benefits li::before { margin-right: 7px; color: var(--yellow); content: "✓"; }
 .price-offer__button { flex: 0 0 auto; margin-top: clamp(30px, 3vw, 44px); }
-.price-offer__visual { position: relative; min-height: 100%; overflow: visible; }
-.price-offer__visual::after { position: absolute; z-index: 1; top: 0; right: 0; bottom: 0; left: -110px; background: linear-gradient(90deg, #22231e 0%, rgba(34,35,30,.98) 12%, rgba(34,35,30,.78) 30%, rgba(34,35,30,.38) 51%, rgba(34,35,30,.08) 70%, transparent 84%), linear-gradient(180deg, rgba(0,0,0,.03) 24%, rgba(0,0,0,.86) 100%); content: ""; pointer-events: none; }
-.price-offer__visual img { width: 100%; height: 100%; object-fit: cover; }
-.price-offer__visual span { position: absolute; z-index: 2; right: 28px; bottom: 28px; left: 28px; max-width: 410px; color: var(--white); font-size: 14px; font-weight: 900; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
+.price-offer__visual { position: relative; width: calc(100% + 140px); min-height: 100%; margin-left: -140px; overflow: visible; }
+.price-offer__visual::after { position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, transparent 38%, rgba(0,0,0,.08) 56%, rgba(0,0,0,.86) 100%); content: ""; pointer-events: none; }
+.price-offer__visual img { width: 100%; height: 100%; object-fit: cover; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.12) 10%, rgba(0,0,0,.42) 23%, rgba(0,0,0,.78) 38%, #000 55%, #000 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.12) 10%, rgba(0,0,0,.42) 23%, rgba(0,0,0,.78) 38%, #000 55%, #000 100%); }
+.price-offer__visual span { position: absolute; z-index: 2; right: 28px; bottom: 28px; left: 168px; max-width: 410px; color: var(--white); font-size: 14px; font-weight: 900; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
 
 .brands-section { padding: clamp(88px, 9vw, 138px) 0; overflow: hidden; background: #ebeae4; }
 .brands-heading { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; margin: 0 var(--gutter) 34px; }
@@ -637,7 +637,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .price-offer__benefits, .price-offer__benefits li { min-width: 0; max-width: 100%; }
   .price-offer__benefits li { width: fit-content; padding: 11px 13px; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
   .price-offer__button { width: 100%; margin-top: 30px; }
-  .price-offer__visual { min-height: clamp(270px, 78vw, 340px); order: -1; }
+  .price-offer__visual { width: 100%; min-height: clamp(270px, 78vw, 340px); margin-left: 0; order: -1; }
+  .price-offer__visual img { mask-image: none; -webkit-mask-image: none; }
   .price-offer__visual::after { left: 0; background: linear-gradient(180deg, rgba(0,0,0,.03) 12%, rgba(0,0,0,.2) 46%, rgba(0,0,0,.94) 100%); }
   .price-offer__visual span { right: 18px; bottom: 17px; left: 18px; font-size: 14px; }
   .brands-section { padding: 68px 0; }
