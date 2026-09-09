@@ -92,13 +92,14 @@ function initRegionMap(map) {
   }
 
   function resetRegion() {
+    const isMobileMap = window.matchMedia("(max-width: 760px)").matches;
     activeRegion?.classList.remove("is-active");
     activeRegion?.setAttribute("aria-pressed", "false");
     activeRegion = undefined;
     map.classList.remove("has-region-hover");
-    if (popoverRegion) popoverRegion.textContent = "Область";
-    renderCities(popoverCities, ["Город"]);
-    popover?.setAttribute("aria-hidden", "true");
+    if (popoverRegion) popoverRegion.textContent = isMobileMap ? "Выберите область" : "Область";
+    renderCities(popoverCities, [isMobileMap ? "Город появится здесь" : "Город"]);
+    popover?.setAttribute("aria-hidden", String(!isMobileMap));
   }
 
   const selectFromPointer = (event) => {
