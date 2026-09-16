@@ -53,78 +53,117 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
-function initRegionMap(map) {
-  const popover = map.querySelector("[data-region-popover]");
-  const popoverRegion = map.querySelector("[data-popover-region]");
-  const popoverCities = map.querySelector("[data-popover-cities]");
-  const regionLayer = map.querySelector(".oblasts");
-  let activeRegion;
+function initCityMap(map) {
+  const mapObject = map.querySelector("[data-city-map-object]");
+  const statusTitle = map.querySelector("[data-city-map-title]");
+  const statusDescription = map.querySelector("[data-city-map-description]");
+  let selectedRegion;
+  let boundDocument;
 
-  function renderCities(list, cities) {
-    if (!list) return;
-    list.replaceChildren(...cities.map((city) => {
-      const item = document.createElement("li");
-      item.textContent = city;
-      return item;
-    }));
+  if (!mapObject) return;
+
+  function showStatus(title, description, isMinsk = false) {
+    if (statusTitle) statusTitle.textContent = title;
+    if (statusDescription) statusDescription.textContent = description;
+    map.classList.toggle("is-minsk-active", isMinsk);
+  }
+
+  function restoreStatus() {
+    if (selectedRegion) {
+      const name = selectedRegion.getAttribute("aria-label") || "Выбранная область";
+      showStatus(
+        name,
+        name === "Минск" ? "Минск выбран и подсвечен на карте" : "Выбранная область подсвечена на карте",
+        name === "Минск",
+      );
+      return;
+    }
+
+    showStatus(
+      "Выберите город или область",
+      "Для Минска доступна отдельная интерактивная зона",
+    );
   }
 
   function selectRegion(region) {
     if (!region) return;
-    const cities = region.dataset.cities.split(",").map((city) => city.trim()).filter(Boolean);
 
-    activeRegion?.classList.remove("is-active");
-    activeRegion?.setAttribute("aria-pressed", "false");
-    region.classList.add("is-active");
-    region.setAttribute("aria-pressed", "true");
-    activeRegion = region;
+    selectedRegion?.classList.remove("is-selected");
+    selectedRegion = region;
+    selectedRegion.classList.add("is-selected");
 
-    map.classList.add("has-region-hover");
-
-    if (popoverRegion) popoverRegion.textContent = region.dataset.region;
-    renderCities(popoverCities, cities);
-
-    if (popover) {
-      popover.style.setProperty("--popover-x", `${region.dataset.popoverX}%`);
-      popover.style.setProperty("--popover-y", `${region.dataset.popoverY}%`);
-      popover.setAttribute("aria-hidden", "false");
-    }
+    const name = region.getAttribute("aria-label") || "Выбранная область";
+    showStatus(
+      name,
+      name === "Минск" ? "Минск выбран и подсвечен на карте" : "Выбранная область подсвечена на карте",
+      name === "Минск",
+    );
   }
 
-  function resetRegion() {
-    const isMobileMap = window.matchMedia("(max-width: 760px)").matches;
-    activeRegion?.classList.remove("is-active");
-    activeRegion?.setAttribute("aria-pressed", "false");
-    activeRegion = undefined;
-    map.classList.remove("has-region-hover");
-    if (popoverRegion) popoverRegion.textContent = isMobileMap ? "Выберите область" : "Область";
-    renderCities(popoverCities, [isMobileMap ? "Город появится здесь" : "Город"]);
-    popover?.setAttribute("aria-hidden", String(!isMobileMap));
+  function bindInteractiveMap() {
+    const svgDocument = mapObject.contentDocument;
+    if (!svgDocument || svgDocument === boundDocument) return;
+    boundDocument = svgDocument;
+
+    const regions = [...svgDocument.querySelectorAll(".region")];
+    const markers = [...svgDocument.querySelectorAll(".marker")];
+
+    regions.forEach((region) => {
+      const name = region.getAttribute("aria-label") || "Область";
+
+      region.addEventListener("mouseenter", () => {
+        showStatus(
+          name,
+          name === "Минск" ? "Нажмите, чтобы оставить Минск подсвеченным" : "Нажмите, чтобы закрепить выбранную область",
+          name === "Минск",
+        );
+      });
+      region.addEventListener("mouseleave", restoreStatus);
+      region.addEventListener("focus", () => {
+        showStatus(
+          name,
+          name === "Минск" ? "Нажмите Enter, чтобы выбрать Минск" : "Нажмите Enter, чтобы выбрать область",
+          name === "Минск",
+        );
+      });
+      region.addEventListener("blur", restoreStatus);
+      region.addEventListener("click", () => selectRegion(region));
+      region.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        selectRegion(region);
+      });
+    });
+
+    markers.forEach((marker) => {
+      const city = marker.getAttribute("aria-label") || "Город";
+
+      marker.addEventListener("click", () => {
+        marker.focus();
+        showStatus(city, "Город отмечен на карте размещения", city === "Минск");
+      });
+      marker.addEventListener("focus", () => {
+        showStatus(city, "Город отмечен на карте размещения", city === "Минск");
+      });
+      marker.addEventListener("blur", restoreStatus);
+    });
+
+    svgDocument.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      selectedRegion?.classList.remove("is-selected");
+      selectedRegion = undefined;
+      svgDocument.activeElement?.blur();
+      restoreStatus();
+    });
+
+    restoreStatus();
   }
 
-  const selectFromPointer = (event) => {
-    const region = event.target.closest?.("[data-region]");
-    if (region && regionLayer.contains(region)) selectRegion(region);
-  };
-
-  if (window.matchMedia("(hover: hover)").matches) {
-    regionLayer?.addEventListener("mouseover", selectFromPointer);
-    regionLayer?.addEventListener("mouseleave", resetRegion);
-  }
-
-  regionLayer?.addEventListener("click", selectFromPointer);
-  regionLayer?.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    const region = event.target.closest?.("[data-region]");
-    if (!region || !regionLayer.contains(region)) return;
-    event.preventDefault();
-    selectRegion(region);
-  });
-
-  resetRegion();
+  mapObject.addEventListener("load", bindInteractiveMap);
+  if (mapObject.contentDocument?.readyState === "complete") bindInteractiveMap();
 }
 
-document.querySelectorAll("[data-region-map]").forEach(initRegionMap);
+document.querySelectorAll("[data-city-map]").forEach(initCityMap);
 
 document.querySelectorAll("[data-lead-form]").forEach((form) => {
   form.addEventListener("submit", (event) => {
