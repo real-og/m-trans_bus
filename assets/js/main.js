@@ -107,6 +107,18 @@ function initCityMap(map) {
 
     const regions = [...svgDocument.querySelectorAll(".region")];
     const markers = [...svgDocument.querySelectorAll(".marker")];
+    const minskRegion = regions.find((region) => region.getAttribute("aria-label") === "Минск");
+
+    if (minskRegion) {
+      const hitArea = svgDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
+      hitArea.setAttribute("cx", "489");
+      hitArea.setAttribute("cy", "343");
+      hitArea.setAttribute("r", "20");
+      hitArea.setAttribute("fill", "transparent");
+      hitArea.setAttribute("pointer-events", "all");
+      minskRegion.prepend(hitArea);
+      minskRegion.parentElement?.append(minskRegion);
+    }
 
     regions.forEach((region) => {
       const name = region.getAttribute("aria-label") || "Область";
