@@ -53,35 +53,66 @@ document.querySelectorAll(".steps article").forEach((step) => {
   });
 });
 
+const cityMapRegions = {
+  "Брестская область": ["Барановичи", "Брест", "Пинск", "Кобрин"],
+  "Витебская область": ["Витебск", "Орша", "Полоцк", "Глубокое"],
+  "Гомельская область": ["Гомель", "Жлобин", "Мозырь", "Светлогорск", "Речица", "Рогачев"],
+  "Гродненская область": ["Гродно", "Лида", "Слоним", "Сморгонь"],
+  "Минская область": ["Борисов", "Молодечно", "Слуцк", "Солигорск", "Жодино"],
+  "Могилёвская область": ["Могилев", "Бобруйск", "Осиповичи"],
+  "Минск": ["Минск"],
+};
+
+const cityMapCityRegions = new Map(
+  Object.entries(cityMapRegions).flatMap(([region, cities]) => cities.map((city) => [city, region])),
+);
+
 function initCityMap(map) {
   const mapObject = map.querySelector("[data-city-map-object]");
   const statusTitle = map.querySelector("[data-city-map-title]");
   const statusDescription = map.querySelector("[data-city-map-description]");
+  const statusCities = map.querySelector("[data-city-map-cities]");
   let selectedRegion;
   let boundDocument;
 
   if (!mapObject) return;
 
-  function showStatus(title, description, isMinsk = false) {
+  function renderCities(cities) {
+    if (!statusCities) return;
+    statusCities.replaceChildren(...cities.map((city) => {
+      const item = document.createElement("li");
+      item.textContent = city;
+      return item;
+    }));
+  }
+
+  function showStatus(title, description, cities, isMinsk = false) {
     if (statusTitle) statusTitle.textContent = title;
     if (statusDescription) statusDescription.textContent = description;
+    renderCities(cities);
     map.classList.toggle("is-minsk-active", isMinsk);
+  }
+
+  function showRegion(name) {
+    const cities = cityMapRegions[name] || [];
+    showStatus(
+      name,
+      name === "Минск" ? "Размещение доступно по городским маршрутам столицы." : "Города, доступные для запуска кампании:",
+      cities,
+      name === "Минск",
+    );
   }
 
   function restoreStatus() {
     if (selectedRegion) {
-      const name = selectedRegion.getAttribute("aria-label") || "Выбранная область";
-      showStatus(
-        name,
-        name === "Минск" ? "Минск выбран и подсвечен на карте" : "Выбранная область подсвечена на карте",
-        name === "Минск",
-      );
+      showRegion(selectedRegion.getAttribute("aria-label") || "Выбранная область");
       return;
     }
 
     showStatus(
-      "Выберите город или область",
-      "Для Минска доступна отдельная интерактивная зона",
+      "Работаем по всей Беларуси",
+      "Выберите область — здесь появятся все доступные города.",
+      ["Минск и 26 городов во всех областях"],
     );
   }
 
@@ -91,12 +122,23 @@ function initCityMap(map) {
     selectedRegion?.classList.remove("is-selected");
     selectedRegion = region;
     selectedRegion.classList.add("is-selected");
+    showRegion(region.getAttribute("aria-label") || "Выбранная область");
+  }
 
-    const name = region.getAttribute("aria-label") || "Выбранная область";
+  function showMarkerRegion(marker) {
+    const city = marker.getAttribute("aria-label") || "Город";
+    const region = cityMapCityRegions.get(city);
+
+    if (!region) {
+      showStatus(city, "Город доступен для запуска рекламной кампании.", [city], city === "Минск");
+      return;
+    }
+
     showStatus(
-      name,
-      name === "Минск" ? "Минск выбран и подсвечен на карте" : "Выбранная область подсвечена на карте",
-      name === "Минск",
+      region,
+      region === "Минск" ? "Размещение доступно по городским маршрутам столицы." : `Выбран город ${city}. Также в области доступны:`,
+      cityMapRegions[region],
+      region === "Минск",
     );
   }
 
@@ -121,23 +163,11 @@ function initCityMap(map) {
     }
 
     regions.forEach((region) => {
-      const name = region.getAttribute("aria-label") || "Область";
+      const showCurrentRegion = () => showRegion(region.getAttribute("aria-label") || "Область");
 
-      region.addEventListener("mouseenter", () => {
-        showStatus(
-          name,
-          name === "Минск" ? "Нажмите, чтобы оставить Минск подсвеченным" : "Нажмите, чтобы закрепить выбранную область",
-          name === "Минск",
-        );
-      });
+      region.addEventListener("mouseenter", showCurrentRegion);
       region.addEventListener("mouseleave", restoreStatus);
-      region.addEventListener("focus", () => {
-        showStatus(
-          name,
-          name === "Минск" ? "Нажмите Enter, чтобы выбрать Минск" : "Нажмите Enter, чтобы выбрать область",
-          name === "Минск",
-        );
-      });
+      region.addEventListener("focus", showCurrentRegion);
       region.addEventListener("blur", restoreStatus);
       region.addEventListener("click", () => selectRegion(region));
       region.addEventListener("keydown", (event) => {
@@ -148,15 +178,15 @@ function initCityMap(map) {
     });
 
     markers.forEach((marker) => {
-      const city = marker.getAttribute("aria-label") || "Город";
+      const showCurrentMarker = () => showMarkerRegion(marker);
 
+      marker.addEventListener("mouseenter", showCurrentMarker);
+      marker.addEventListener("mouseleave", restoreStatus);
       marker.addEventListener("click", () => {
         marker.focus();
-        showStatus(city, "Город отмечен на карте размещения", city === "Минск");
+        showCurrentMarker();
       });
-      marker.addEventListener("focus", () => {
-        showStatus(city, "Город отмечен на карте размещения", city === "Минск");
-      });
+      marker.addEventListener("focus", showCurrentMarker);
       marker.addEventListener("blur", restoreStatus);
     });
 
