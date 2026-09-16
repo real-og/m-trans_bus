@@ -243,9 +243,9 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .coverage-section::before { position: absolute; top: 12%; left: -150px; width: 420px; height: 420px; border: 1px solid rgba(17,18,15,.07); border-radius: 50%; box-shadow: 0 0 0 65px rgba(17,18,15,.018), 0 0 0 130px rgba(17,18,15,.012); content: ""; pointer-events: none; }
 .coverage-section .section-heading em { display: inline; padding: 0 .16em; border-radius: .12em; background: var(--yellow); color: var(--ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .coverage-section .split-heading > p { max-width: 540px; color: #3e403a; font-size: clamp(17px, 1.35vw, 20px); font-weight: 700; line-height: 1.6; }
-.coverage-card { position: relative; z-index: 1; display: grid; min-height: min(790px, calc(100vh - 80px)); grid-template-columns: minmax(310px, .58fr) minmax(0, 1.42fr); overflow: hidden; border: 1px solid rgba(255,213,0,.18); border-radius: 32px; background: #20211d; box-shadow: 0 35px 85px rgba(17,18,15,.2); color: var(--white); isolation: isolate; }
+.coverage-card { position: relative; z-index: 1; display: grid; height: clamp(740px, calc(100vh - 80px), 790px); min-height: 0; grid-template-columns: minmax(310px, .58fr) minmax(0, 1.42fr); overflow: hidden; border: 1px solid rgba(255,213,0,.18); border-radius: 32px; background: #20211d; box-shadow: 0 35px 85px rgba(17,18,15,.2); color: var(--white); isolation: isolate; }
 .coverage-card::before { display: none; }
-.coverage-copy { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 3.25vw, 52px); background: transparent; }
+.coverage-copy { position: relative; z-index: 3; display: flex; min-height: 0; flex-direction: column; justify-content: flex-start; padding: clamp(32px, 3.25vw, 52px); background: transparent; }
 .coverage-copy__eyebrow { display: inline-flex; width: fit-content; align-items: center; gap: 10px; color: var(--yellow); font-size: 11px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
 .coverage-copy__eyebrow::before { width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 6px rgba(255,213,0,.1); content: ""; }
 .coverage-copy h3 { margin: 28px 0 20px; font-family: "Druk Wide Cyr", "Montserrat"; font-size: clamp(30px, 2.7vw, 46px); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; text-transform: uppercase; }
@@ -256,6 +256,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .coverage-stats dd { margin: 0; color: #f0f1eb; font-size: 11.5px; font-weight: 900; letter-spacing: .055em; line-height: 1.4; text-transform: uppercase; }
 .coverage-selection {
   display: grid;
+  align-content: start;
   gap: 5px;
   margin-top: 28px;
   padding: 17px 18px;
@@ -284,7 +285,8 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   z-index: 1;
   display: flex;
   min-width: 0;
-  min-height: min(790px, calc(100vh - 80px));
+  height: 100%;
+  min-height: 0;
   flex-direction: column;
   justify-content: center;
   gap: 0;
@@ -642,7 +644,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .steps article.is-open .step-tap-hint::after { content: "−"; }
   .coverage-section .section-heading em { display: inline; padding: 0 .12em; }
   .coverage-section { padding-right: var(--gutter); padding-left: var(--gutter); }
-  .coverage-card { min-height: 0; grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
+  .coverage-card { height: auto; min-height: 0; grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
   .coverage-copy { order: 2; padding: 28px 20px 24px; }
   .coverage-copy__eyebrow { font-size: 12px; }
   .coverage-section .split-heading > p { font-size: 16.5px; font-weight: 700; line-height: 1.6; }
@@ -657,7 +659,7 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
   .coverage-selection strong { font-size: 15px; }
   .coverage-selection p, .coverage-selection li { font-size: 12px; }
   .coverage-selection ul { gap: 8px 10px; }
-  .belarus-cities-map { min-height: 0; gap: 0; padding: 16px 6px 0; order: -1; overflow: visible; }
+  .belarus-cities-map { height: auto; min-height: 0; gap: 0; padding: 16px 6px 0; order: -1; overflow: visible; }
   .belarus-cities-map__stage { width: 100%; border-radius: 0; }
   .price-offer { width: 100%; min-width: 0; min-height: 0; grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
   .price-offer__content, .price-offer__visual { width: 100%; min-width: 0; }
