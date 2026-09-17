@@ -277,13 +277,6 @@ h2 { max-width: 1050px; font-size: clamp(40px, 4.8vw, 75px); }
 .coverage-selection li { position: relative; min-width: 0; padding-left: 13px; color: #f0f1eb; font-size: 12px; font-weight: 750; line-height: 1.4; overflow-wrap: anywhere; }
 .coverage-selection li::before { position: absolute; top: .52em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); content: ""; }
 .coverage-selection li:only-child { grid-column: 1 / -1; }
-.is-minsk-active .coverage-selection {
-  border-color: rgba(255,213,0,.62);
-  background: rgba(255,213,0,.1);
-  box-shadow: 0 0 30px rgba(255,213,0,.08), inset 0 1px 0 rgba(255,255,255,.05);
-}
-.is-minsk-active .coverage-selection strong { color: var(--yellow); }
-
 .belarus-cities-map {
   position: relative;
   z-index: 1;

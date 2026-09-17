@@ -60,7 +60,6 @@ const cityMapRegions = {
   "Гродненская область": ["Гродно", "Лида", "Слоним", "Сморгонь"],
   "Минская область": ["Борисов", "Молодечно", "Слуцк", "Солигорск", "Жодино"],
   "Могилёвская область": ["Могилев", "Бобруйск", "Осиповичи"],
-  "Минск": ["Минск"],
 };
 
 const cityMapCityRegions = new Map(
@@ -86,20 +85,18 @@ function initCityMap(map) {
     }));
   }
 
-  function showStatus(title, description, cities, isMinsk = false) {
+  function showStatus(title, description, cities) {
     if (statusTitle) statusTitle.textContent = title;
     if (statusDescription) statusDescription.textContent = description;
     renderCities(cities);
-    map.classList.toggle("is-minsk-active", isMinsk);
   }
 
   function showRegion(name) {
     const cities = cityMapRegions[name] || [];
     showStatus(
       name,
-      name === "Минск" ? "Размещение доступно по городским маршрутам столицы." : "Города, доступные для запуска кампании:",
+      "Города, доступные для запуска кампании:",
       cities,
-      name === "Минск",
     );
   }
 
@@ -112,7 +109,7 @@ function initCityMap(map) {
     showStatus(
       "Работаем по всей Беларуси",
       "Выберите область — здесь появятся все доступные города.",
-      ["Минск и 26 городов во всех областях"],
+      ["26 городов во всех областях"],
     );
   }
 
@@ -130,15 +127,14 @@ function initCityMap(map) {
     const region = cityMapCityRegions.get(city);
 
     if (!region) {
-      showStatus(city, "Город доступен для запуска рекламной кампании.", [city], city === "Минск");
+      showStatus(city, "Город доступен для запуска рекламной кампании.", [city]);
       return;
     }
 
     showStatus(
       region,
-      region === "Минск" ? "Размещение доступно по городским маршрутам столицы." : `Выбран город ${city}. Также в области доступны:`,
+      `Выбран город ${city}. Также в области доступны:`,
       cityMapRegions[region],
-      region === "Минск",
     );
   }
 
@@ -149,18 +145,6 @@ function initCityMap(map) {
 
     const regions = [...svgDocument.querySelectorAll(".region")];
     const markers = [...svgDocument.querySelectorAll(".marker")];
-    const minskRegion = regions.find((region) => region.getAttribute("aria-label") === "Минск");
-
-    if (minskRegion) {
-      const hitArea = svgDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
-      hitArea.setAttribute("cx", "489");
-      hitArea.setAttribute("cy", "343");
-      hitArea.setAttribute("r", "20");
-      hitArea.setAttribute("fill", "transparent");
-      hitArea.setAttribute("pointer-events", "all");
-      minskRegion.prepend(hitArea);
-      minskRegion.parentElement?.append(minskRegion);
-    }
 
     regions.forEach((region) => {
       const showCurrentRegion = () => showRegion(region.getAttribute("aria-label") || "Область");
